@@ -1,0 +1,19 @@
+PowerShell Command:
+
+az vm extension set --resource-group azuredemo --vm-name linuxvm --name customScript --publisher Microsoft.Azure.Extensions --settings customscript.json
+
+
+
+install_web.sh1:
+
+apt-get update -y && apt-get upgrade -y
+
+apt-get install -y nginx
+
+
+customscript.json:
+
+{
+  "fileUris": ["https://raw.githubusercontent.com/alashro/sampleweb/master/install_web.sh"],
+  "commandToExecute": "./install_web.sh"
+}
