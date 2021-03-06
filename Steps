@@ -75,3 +75,25 @@ eg.
 az vmss extension set --publisher "Microsoft.Compute" --version 1.10 --resource-group RG-VM-SS --vmss-name SS-02-CLI --settings "appcustomscript.json" --name CustomScriptExtension
 
 
+
+
+
+
+
+====VMSS Load Balancing Practice ====
+
+1. Add the following to the install.ps1 file
+
+    Add-WindowsFeature Web-Server
+    Set-Content -Path "C:\inetpub\wwwroot\Default.html" -Value "This is the server $($env:computername) !"
+
+2. Execute the following commands for custom script extensions
+
+    $config = @{
+      "fileUris" = (,"https://storageaccdr.blob.core.windows.net/script-win-lb/InstallIIS.ps1");
+      "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File install.ps1"
+    }
+
+    $set = Get-AzVmss -ResourceGroupName "RG-VM-SS" -VMScaleSetName "VM-VMSS-LB"
+    $set = Add-AzVmssExtension -VirtualMachineScaleSet $set -Name "customScript" -Publisher "Microsoft.Compute" -Type "CustomScriptExtension" -TypeHandlerVersion 1.9 -Setting $config
+    Update-AzVmss -ResourceGroupName "RG-VM-SS" -Name "VM-VMSS-LB" -VirtualMachineScaleSet $set
