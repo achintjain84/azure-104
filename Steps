@@ -31,3 +31,40 @@ InstallIIS.ps1:
 
 import-module servermanager
 add-windowsfeature web-server -includeallsubfeature
+
+
+
+
+
+====VM Scale Set===
+
+---Linux machine update commands:
+sudo apt-get update
+
+---Install Stress tool
+sudo apt-get install -y stress
+
+sudo stress  —cpu 70
+
+
+---Create a VMSS using CLI:
+az vmss create -n SS-02-CLI -g RG-VM-SS --instance-count 1 --image Win2016Datacenter --data-disk-sizes-gb 10 --vnet-name SS-02-CLI-vnet --subnet default --public-ip-per-vm --admin-username achint
+
+
+
+
+// Custom Script for add Extension for a scale set using command line
+1. Add the command in GitHub eg. https://raw.githubusercontent.com/achintjain84/azure-104/main/InstallIIS.ps1
+2. Add the GitHub path in appcustomscript.json 
+eg. 
+  {
+  "fileUris": ["https://raw.githubusercontent.com/achintjain84/azure-104/main/InstallIIS.ps1"],
+  "commandToExecute": "./InstallIIS.ps1"
+  }
+  
+3. Upload the customscript in CLI : 
+4. Execute below command.
+
+az vmss extension set --publisher "Microsoft.Compute" --version 1.10 --resource-group RG-VM-SS --vmss-name SS-02-CLI --settings "appcustomscript.json" --name CustomScriptExtension
+
+
