@@ -11,13 +11,21 @@ apt-get update -y && apt-get upgrade -y
 apt-get install -y nginx
 
 
-customscript.json:
+customscript.json: Unix Server: 
 
 {
   "fileUris": ["https://raw.githubusercontent.com/alashro/sampleweb/master/install_web.sh"],
   "commandToExecute": "./install_web.sh"
 }
 
+
+appcustomscript.json  Windows Server: 
+eg. 
+  {
+    "fileUris": ["https://raw.githubusercontent.com/achintjain84/azure-104/main/InstallIIS.ps1"],
+    "commandToExecute": "powershell.exe ./InstallIIS.ps1"
+  }
+  
 =============
 
 #cloud-config
@@ -58,10 +66,9 @@ az vmss create -n SS-02-CLI -g RG-VM-SS --instance-count 1 --image Win2016Datace
 2. Add the GitHub path in appcustomscript.json 
 eg. 
   {
-  "fileUris": ["https://raw.githubusercontent.com/achintjain84/azure-104/main/InstallIIS.ps1"],
-  "commandToExecute": "./InstallIIS.ps1"
+    "fileUris": ["https://raw.githubusercontent.com/achintjain84/azure-104/main/InstallIIS.ps1"],
+    "commandToExecute": "powershell.exe ./InstallIIS.ps1"
   }
-  
 3. Upload the customscript in CLI : 
 4. Execute below command.
 
