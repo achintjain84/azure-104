@@ -91,7 +91,7 @@ az vmss extension set --publisher "Microsoft.Compute" --version 1.10 --resource-
 
     $config = @{
       "fileUris" = (,"https://storageaccdr.blob.core.windows.net/script-win-lb/InstallIIS.ps1");
-      "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File install.ps1"
+      "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File InstallIIS.ps1"
     }
 
     $set = Get-AzVmss -ResourceGroupName "RG-VM-SS" -VMScaleSetName "VM-VMSS-LB"
@@ -99,3 +99,6 @@ az vmss extension set --publisher "Microsoft.Compute" --version 1.10 --resource-
     $set = Add-AzVmssExtension -VirtualMachineScaleSet $set -Name "customScript" -Publisher "Microsoft.Compute" -Type "CustomScriptExtension" -TypeHandlerVersion 1.9 -Setting $config
     
     Update-AzVmss -ResourceGroupName "RG-VM-SS" -Name "VM-VMSS-LB" -VirtualMachineScaleSet $set
+
+
+
