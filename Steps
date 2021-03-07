@@ -139,6 +139,9 @@ az appservice plan create --name webappplan7000 --resource-group RG-03 --sku B1
 az webapp create --name webapp-02 --plan webappplan7000 --resource-group RG-03
   
   
+# DEPLOY JAVA WEBAPP : https://docs.microsoft.com/en-us/azure/app-service/quickstart-java?pivots=platform-linux&tabs=javase
+
+
   
   
   
