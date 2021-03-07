@@ -1,7 +1,9 @@
-PowerShell Command:
-
+PowerShell Command to add customescript from command line:
+UNIX:
 az vm extension set --resource-group azuredemo --vm-name linuxvm --name customScript --publisher Microsoft.Azure.Extensions --settings customscript.json
 
+WIN:
+az vm extension set --publisher "Microsoft.Compute" --version 1.10 --resource-group RG-03 --vm-name VM-03 --settings "appcustomscript.json" --name CustomScriptExtension
 
 
 install_web.sh1:
@@ -125,8 +127,16 @@ az vmss extension set --publisher "Microsoft.Compute" --version 1.10 --resource-
   
   
  
-  
-  
+ 
+ ==== AZURE WEB APP CLI ====
+  Lab - Azure Web App - CLI - Resources
+// First go ahead and create the App Service Plan
+
+az appservice plan create --name webappplan7000 --resource-group RG-03 --sku B1
+
+// Then go ahead and create the Azure Web App
+
+az webapp create --name webapp-02 --plan webappplan7000 --resource-group RG-03
   
   
   
