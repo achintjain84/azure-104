@@ -102,3 +102,42 @@ az vmss extension set --publisher "Microsoft.Compute" --version 1.10 --resource-
 
 
 
+
+===== Create VM Image ====
+
+
+ 1. Login to machine.
+ 2. navigate to sysprep folder and run sysprep tool:
+    %windir%\system32\sysprep
+ 3. STOP/Deallocate the VM:
+    Stop-AzVm -ResourceGroupName RG-01 -Name VM-IMAGE -FORCE
+
+
+
+
+======Resize VM =====
+
+  1. $vm = Get-AzVM -ResourceGroupName RG-01 -VMName VM-02
+
+  2. $vm.HardwareProfile.VmSize ="Standard_B1s"
+
+  3. Update-AzVM -VM $vm -ResourceGroupName RG-01
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    
+    
